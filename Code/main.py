@@ -81,7 +81,7 @@ while running:
         birdX = 735
         bird_x_dir *= -1
 
-    if fire_state is "fire":
+    if fire_state == "fire":
         rock(slingshotX, stoneY)
         stoneY -= stoneY_change
 
