@@ -16,3 +16,10 @@ Simple game made using pygame in python
 
 - Slingshot movement - left/right arrow keys
 - Shooting - spacebar
+
+
+
+## Authors
+
+- [Shivanshu Chaudhary](https://www.github.com/shivanshu-chdry)
+- [Ojas Maheshwari](https://www.github.com/ojasmaheshwari)
