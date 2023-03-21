@@ -38,6 +38,7 @@ stoneY_change = 0.6
 fire_state = "ready"
 
 
+#Butterfly
 butterfly = pygame.image.load("butterfly.png")
 butterflyX = 820
 original = butterflyX
@@ -54,10 +55,14 @@ original3 = butterflyX3
 
 score = 0
 
-#Weapon function
+
+
+#Weapon
 def weapon(x,y):
     screen.blit(slingshot, (x, y)) 
 
+
+#Enemy
 def enemy(x,y):
     screen.blit(bird, (x, y))
 
@@ -67,11 +72,15 @@ def enemy2(x,y):
 def enemy3(x,y):
     screen.blit(bird, (x, y))
 
+
+#Rock
 def rock(x,y):
     global fire_state
     fire_state = "fire"
     screen.blit(stone, (x, y))
 
+
+#Collision
 def collision1(birdX, birdY, stoneX, stoneY):
     distance = math.sqrt((math.pow(birdX - stoneX, 2)) + (math.pow(birdY - stoneY, 2)))
     if distance < 35:
@@ -92,7 +101,9 @@ def collision3(birdX3, birdY3, stoneX, stoneY):
         return True
     else:
         return False
-    
+
+
+#Innocent(butterfly)
 def innocent(x, y):
     screen.blit(butterfly, (x, y))
 
@@ -111,6 +122,7 @@ while running:
     screen.fill((255,255,255))
     stoneX = slingshotX + 10
 
+    #Events
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             running = False
@@ -129,6 +141,7 @@ while running:
                 slingshotX_change = 0
         
 
+    #Movements
     slingshotX += slingshotX_change
 
     birdX += bird_x_dir
@@ -139,11 +152,13 @@ while running:
     butterflyX2 -= butterflyX_change
     butterflyX3 -= butterflyX_change
 
+    #Boundaries
     if slingshotX < 5:
         slingshotX = 5
 
     if slingshotX > 735:
         slingshotX = 735
+
 
     if birdX < 5:
         birdX = 5
@@ -179,18 +194,19 @@ while running:
     if butterflyX3 < 5:
         butterflyX3 = original3
 
-
+    #Stone movement
     if fire_state == "fire":
         rock(slingshotX + 10, stoneY)
         stoneY -= stoneY_change
 
+    #Stone reloading
     if stoneY <= 0:
         stoneY = 475
         fire_state = "ready"
 
 
 
-
+    #Collision detection
     Collision = collision1(birdX, birdY, stoneX, stoneY)
     Collision2 = collision2(birdX2, birdY2, stoneX, stoneY)
     Collision3 = collision3(birdX3, birdY3, stoneX, stoneY)
@@ -199,6 +215,7 @@ while running:
     InnocentCollision2 = collision2(butterflyX2, butterflyY, stoneX, stoneY)
     InnocentCollision3 = collision3(butterflyX3, butterflyY, stoneX, stoneY)
 
+    #Re-load
     if Collision:
         fire_state = "ready"
         stoneY = 475
@@ -218,6 +235,7 @@ while running:
         score += 1
         print(score)
 
+    #Game over conditions
     if InnocentCollision:
         running = False
 
@@ -228,6 +246,7 @@ while running:
         running = False
     
 
+    #Objects of game
     enemy(birdX, birdY)
     enemy2(birdX2, birdY2)
     enemy3(birdX3, birdY3)
@@ -240,13 +259,17 @@ while running:
 
     pygame.display.update()
 
+
+
 gameover = True
 
+#Game-over loop
 while gameover:
 
     screen.fill((255,255,255))
     stoneX = slingshotX + 10
 
+    #Event
     for event in pygame.event.get():
         if event.type == pygame.QUIT: 
             gameover = False
